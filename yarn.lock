@@ -1546,7 +1546,7 @@ minimatch@^9.0.4:
   dependencies:
     brace-expansion "^2.0.1"
 
-"monaco-editor@npm:@codingame/monaco-vscode-editor-api", "monaco-editor@npm:@codingame/monaco-vscode-editor-api@~11.1.2":
+"monaco-editor@npm:@codingame/monaco-vscode-editor-api@~11.1.2":
   version "11.1.2"
   resolved "https://registry.yarnpkg.com/@codingame/monaco-vscode-editor-api/-/monaco-vscode-editor-api-11.1.2.tgz#3910c21793b187a795712a90bdd03f6dc294541d"
   integrity sha512-RYnk0VpL0uSvrFD9k1Oka+K4dP3rhptBzIFVKwjlvCxL0n/mdbECbrcTLKn7wpR11wfMMWvFDHqlNH7ri3rsXg==
