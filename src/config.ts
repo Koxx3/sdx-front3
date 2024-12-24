@@ -65,7 +65,7 @@ export const createUserConfig = (workspaceRoot: string, code: string, codeUri: s
         },
         vscodeApiConfig: {
             serviceOverrides: {
-                ...getKeybindingsServiceOverride(),
+                // ...getKeybindingsServiceOverride(),
                 ...getThemeServiceOverride(),
                 ...getTextmateServiceOverride()
             },
