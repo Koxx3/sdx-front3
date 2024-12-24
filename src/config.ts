@@ -5,8 +5,13 @@
 
 import * as vscode from 'vscode';
 import * as monaco from 'monaco-editor';
+
 import getKeybindingsServiceOverride from '@codingame/monaco-vscode-keybindings-service-override';
+import getThemeServiceOverride from '@codingame/monaco-vscode-theme-service-override';
+import getTextmateServiceOverride from '@codingame/monaco-vscode-textmate-service-override';
+
 import '@codingame/monaco-vscode-python-default-extension';
+
 import { LogLevel } from 'vscode/services';
 import { MonacoLanguageClient } from 'monaco-languageclient';
 import { createUrl } from 'monaco-languageclient/tools';
@@ -58,11 +63,11 @@ export const createUserConfig = (workspaceRoot: string, code: string, codeUri: s
                 }
             }
         },
-        logLevel: LogLevel.Debug,
         vscodeApiConfig: {
             serviceOverrides: {
-                // ...getEditorServiceOverride(useOpenEditorStub),
-                ...getKeybindingsServiceOverride()
+                ...getKeybindingsServiceOverride(),
+                ...getThemeServiceOverride(),
+                ...getTextmateServiceOverride()
             },
             userConfiguration: {
                 json: JSON.stringify({
