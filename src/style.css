@@ -1,0 +1,9 @@
+/* style.css */
+body {
+    background-color: #242424;
+  }
+  
+  #editor {
+    width: 100vw;
+    height: 100vh;
+  }
