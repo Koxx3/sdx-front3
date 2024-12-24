@@ -4,11 +4,10 @@
  * ------------------------------------------------------------------------------------------ */
 
 import { defineConfig } from 'vite';
-import fs from 'node:fs';
-import * as path from 'node:path';
 import importMetaUrlPlugin from '@codingame/esbuild-import-meta-url-plugin';
 import vsixPlugin from '@codingame/monaco-vscode-rollup-vsix-plugin';
 import react from '@vitejs/plugin-react';
+import path from 'node:path';
 
 export const definedViteConfig = defineConfig({
     build: {
@@ -28,6 +27,14 @@ export const definedViteConfig = defineConfig({
         watch: {
             ignored: [
                 '**/profile/**/*'
+            ]
+        },
+        fs: {
+            allow: [
+                // Keep your main root
+                '.',
+                // Add the absolute path to your node_modules or the subfolder with the extension resources
+                path.resolve(__dirname, '..', 'node_modules'),
             ]
         }
     },
