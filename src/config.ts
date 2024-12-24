@@ -46,9 +46,16 @@ export const createUserConfig = (workspaceRoot: string, code: string, codeUri: s
                         $type: 'WebSocketDirect',
                         webSocket: webSocket,
                         startOptions: {
-                            onCall: (languageClient) => {
-                                console.log(languageClient);
+                            onCall: (languageClient?: MonacoLanguageClient) => {
+                                setTimeout(() => {
+                                    ['pyright.restartserver', 'pyright.organizeimports'].forEach((cmdName) => {
+                                        vscode.commands.registerCommand(cmdName, (...args: unknown[]) => {
+                                            languageClient?.sendRequest('workspace/executeCommand', { command: cmdName, arguments: args });
+                                        });
+                                    });
+                                }, 250);
                             },
+                            reportStatus: true,
                         }
                     },
                     messageTransports: { reader, writer }
