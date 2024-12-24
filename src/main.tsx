@@ -28,7 +28,7 @@ export const runPythonReact = async () => {
     // Initialize React root
     const rootElement = document.getElementById('react-root');
     if (!rootElement) {
-        console.error("Root element with id 'react-root' not found.");
+        console.error("runPythonReact / Root element with id 'react-root' not found.");
         return;
     }
     const root = ReactDOM.createRoot(rootElement);
@@ -36,8 +36,7 @@ export const runPythonReact = async () => {
     // Define the App component
     const App = () => {
         useEffect(() => {
-            // Any side effects or initialization can be placed here
-            console.log("Monaco Editor has been mounted.");
+            console.log("App / Monaco Editor has been mounted.");
         }, []);
 
         return (
@@ -47,10 +46,10 @@ export const runPythonReact = async () => {
                     style={{ height: '100%', width: '100%' }}
                     onTextChanged={onTextChanged}
                     onLoad={(wrapper: MonacoEditorLanguageClientWrapper) => {
-                        console.log(`Loaded ${wrapper.reportStatus().join('\n').toString()}`);
+                        console.log(`MonacoEditorReactComp / Loaded ${wrapper.reportStatus().join('\n').toString()}`);
                     }}
-                    onError={(e) => {
-                        console.error(e);
+                    onError={(e : any) => {
+                        console.error("MonacoEditorReactComp / Error", e);
                     }}
                 />
             </div>
