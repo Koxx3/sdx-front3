@@ -4,6 +4,7 @@
  * ------------------------------------------------------------------------------------------ */
 
 import * as vscode from 'vscode';
+import * as monaco from 'monaco-editor';
 import { RegisteredFileSystemProvider, registerFileSystemOverlay, RegisteredMemoryFile } from '@codingame/monaco-vscode-files-service-override';
 import React, { StrictMode, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
@@ -45,12 +46,22 @@ export const runPythonReact = async () => {
             console.log(`MonacoEditorReactComp / Loaded ${wrapper.reportStatus().join('\n').toString()}`);
 
             setWrapper(wrapper);
-            
+
             setTimeout(() => {
                 console.log("App / load text.");
                 // setContent("toto")
                 wrapper?.getEditor()?.setValue("toto");
             }, 10000);
+
+            const editor = wrapper.getEditor();
+            if (!editor) return;
+
+            // monaco.KeyMod.CtrlCmd equals "Control" on Windows, "Command" on macOS
+            editor?.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, () => {
+                // Put your save logic here
+                console.log('Saving...');
+            });
+
         }
 
         useEffect(() => {
@@ -59,19 +70,6 @@ export const runPythonReact = async () => {
                 return;
             }
             console.log('App / wrapper is now available', wrapper);
-
-
-            // !!!!!!!!!!!!!!!! NO NOT MODIFY THIS !!!!!!!!!!!!!!!!
-            // Now you can do wrapper.onKeyDown(...) or other stuff here
-            wrapper.getEditor()?.onKeyDown((e) => {
-                console.log("App / wrapper ", e);
-                if ((e.keyCode === 83 || e.keyCode === 49) && e.ctrlKey) { // Corrected keyCode to 83 for 'S'
-                    // save();
-                    e.preventDefault();
-                }
-            });
-            // !!!!!!!!!!!!!!!! NO NOT MODIFY THIS !!!!!!!!!!!!!!!!
-
         }, [wrapper]);
 
         return (
