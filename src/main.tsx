@@ -30,6 +30,8 @@ export const runPythonReact = async () => {
         const [wrapper, setWrapper] = useState<MonacoEditorLanguageClientWrapper | null>(null);
         const [nowContent, setContent] = useState<string>(badPyCode);
 
+        const wrapperConfig = createUserConfig('/workspace', nowContent, '/workspace/bad.py');
+
         const badPyUri = vscode.Uri.file('/workspace/bad.py');
         const fileSystemProvider = new RegisteredFileSystemProvider(false);
         fileSystemProvider.registerFile(new RegisteredMemoryFile(badPyUri, badPyCode));
@@ -39,7 +41,17 @@ export const runPythonReact = async () => {
             console.log(`Dirty? ${textChanges.isDirty}\ntext: ${textChanges.modified}\ntextOriginal: ${textChanges.original}`);
         };
 
-        const wrapperConfig = createUserConfig('/workspace', nowContent, '/workspace/bad.py');
+        const onLoad = (wrapper: MonacoEditorLanguageClientWrapper) => {
+            console.log(`MonacoEditorReactComp / Loaded ${wrapper.reportStatus().join('\n').toString()}`);
+
+            setWrapper(wrapper);
+            
+            setTimeout(() => {
+                console.log("App / load text.");
+                // setContent("toto")
+                wrapper?.getEditor()?.setValue("toto");
+            }, 10000);
+        }
 
         useEffect(() => {
             if (!wrapper) {
@@ -47,6 +59,7 @@ export const runPythonReact = async () => {
                 return;
             }
             console.log('App / wrapper is now available', wrapper);
+
 
             // !!!!!!!!!!!!!!!! NO NOT MODIFY THIS !!!!!!!!!!!!!!!!
             // Now you can do wrapper.onKeyDown(...) or other stuff here
@@ -59,14 +72,7 @@ export const runPythonReact = async () => {
             });
             // !!!!!!!!!!!!!!!! NO NOT MODIFY THIS !!!!!!!!!!!!!!!!
 
-
         }, [wrapper]);
-
-        setTimeout(() => {
-            console.log("App / load text.");
-            // setContent("toto")
-            wrapper?.getEditor()?.setValue("toto");
-        }, 10000);
 
         return (
             <div style={{ height: '100vh', width: '100%', padding: '5px' }}>
@@ -74,9 +80,7 @@ export const runPythonReact = async () => {
                     wrapperConfig={wrapperConfig}
                     style={{ height: '100%', width: '100%' }}
                     onTextChanged={onTextChanged}
-                    onLoad={(wrapper: MonacoEditorLanguageClientWrapper) => {
-                        console.log(`MonacoEditorReactComp / Loaded ${wrapper.reportStatus().join('\n').toString()}`);
-                    }}
+                    onLoad={onLoad}
                     onError={(e: any) => {
                         console.error("MonacoEditorReactComp / Error", e);
                     }}
