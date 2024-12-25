@@ -28,7 +28,7 @@ export const runPythonReact = async () => {
     // Define the App component
     const App = () => {
 
-        const [wrapper, setWrapper] = useState<MonacoEditorLanguageClientWrapper | null>(null);
+        const [wrapperState, setWrapperState] = useState<MonacoEditorLanguageClientWrapper | null>(null);
         const [nowContent, setContent] = useState<string>(badPyCode);
 
         const wrapperConfig = createUserConfig('/workspace', nowContent, '/workspace/bad.py');
@@ -45,7 +45,7 @@ export const runPythonReact = async () => {
         const onLoad = (wrapper: MonacoEditorLanguageClientWrapper) => {
             console.log(`MonacoEditorReactComp / Loaded ${wrapper.reportStatus().join('\n').toString()}`);
 
-            setWrapper(wrapper);
+            setWrapperState(wrapper);
 
             setTimeout(() => {
                 console.log("App / load text.");
@@ -58,19 +58,18 @@ export const runPythonReact = async () => {
 
             // monaco.KeyMod.CtrlCmd equals "Control" on Windows, "Command" on macOS
             editor?.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, () => {
-                // Put your save logic here
                 console.log('Saving...');
             });
 
         }
 
         useEffect(() => {
-            if (!wrapper) {
+            if (!wrapperState) {
                 console.log('App / wrapper is still null');
                 return;
             }
-            console.log('App / wrapper is now available', wrapper);
-        }, [wrapper]);
+            console.log('App / wrapper is now available', wrapperState);
+        }, [wrapperState]);
 
         return (
             <div style={{ height: '100vh', width: '100%', padding: '5px' }}>
