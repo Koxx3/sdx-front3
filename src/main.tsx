@@ -5,14 +5,11 @@
 
 import * as vscode from 'vscode';
 import { RegisteredFileSystemProvider, registerFileSystemOverlay, RegisteredMemoryFile } from '@codingame/monaco-vscode-files-service-override';
-import React, { StrictMode, useEffect, useState, useRef } from 'react';
+import React, { StrictMode, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { MonacoEditorReactComp } from '@typefox/monaco-editor-react';
 import { MonacoEditorLanguageClientWrapper, TextChanges } from 'monaco-editor-wrapper';
 import { createUserConfig } from './config.js';
-
-// import { whenReady } from '@codingame/monaco-vscode-python-default-extension';
-import '@codingame/monaco-vscode-python-default-extension';
 
 const badPyCode = `print('Hello World');\nt5sdf12$sf`;
 
@@ -31,7 +28,6 @@ export const runPythonReact = async () => {
     const App = () => {
 
         const [wrapper, setWrapper] = useState<MonacoEditorLanguageClientWrapper | null>(null);
-
         const [nowContent, setContent] = useState<string>(badPyCode);
 
         const badPyUri = vscode.Uri.file('/workspace/bad.py');
@@ -39,25 +35,11 @@ export const runPythonReact = async () => {
         fileSystemProvider.registerFile(new RegisteredMemoryFile(badPyUri, badPyCode));
         registerFileSystemOverlay(1, fileSystemProvider);
 
-
         const onTextChanged = (textChanges: TextChanges) => {
-            console.log(`App / onTextChanged / Dirty? ${textChanges.isDirty}\ntext: ${textChanges.modified}\ntextOriginal: ${textChanges.original}`);
+            console.log(`Dirty? ${textChanges.isDirty}\ntext: ${textChanges.modified}\ntextOriginal: ${textChanges.original}`);
         };
 
-        const onLoad = (wrapper: MonacoEditorLanguageClientWrapper) => {
-            console.log(`App / onLoad / Loaded ${wrapper.reportStatus().join('\n').toString()}`);
-
-            setWrapper(wrapper);
-        }
-
-        /*
-        useEffect(() => {
-            async function init() {
-                await whenReady();
-            }
-            init();
-        })
-        */
+        const wrapperConfig = createUserConfig('/workspace', nowContent, '/workspace/bad.py');
 
         useEffect(() => {
             if (!wrapper) {
@@ -86,15 +68,15 @@ export const runPythonReact = async () => {
             wrapper?.getEditor()?.setValue("toto");
         }, 10000);
 
-        const wrapperConfig = createUserConfig('/workspace', nowContent, '/workspace/bad.py');
-
         return (
             <div style={{ height: '100vh', width: '100%', padding: '5px' }}>
                 <MonacoEditorReactComp
                     wrapperConfig={wrapperConfig}
                     style={{ height: '100%', width: '100%' }}
                     onTextChanged={onTextChanged}
-                    onLoad={onLoad}
+                    onLoad={(wrapper: MonacoEditorLanguageClientWrapper) => {
+                        console.log(`MonacoEditorReactComp / Loaded ${wrapper.reportStatus().join('\n').toString()}`);
+                    }}
                     onError={(e: any) => {
                         console.error("MonacoEditorReactComp / Error", e);
                     }}

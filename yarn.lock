@@ -239,7 +239,7 @@
     "@codingame/monaco-vscode-chat-comments-extensions-interactive-notebook-search-common" "11.1.2"
     vscode "npm:@codingame/monaco-vscode-api@11.1.2"
 
-"@codingame/monaco-vscode-configuration-service-override@^11.1.2", "@codingame/monaco-vscode-configuration-service-override@~11.1.2":
+"@codingame/monaco-vscode-configuration-service-override@~11.1.2":
   version "11.1.2"
   resolved "https://registry.yarnpkg.com/@codingame/monaco-vscode-configuration-service-override/-/monaco-vscode-configuration-service-override-11.1.2.tgz#2752367254a286f733653a95c01741a0ae075b11"
   integrity sha512-dzsl3q4i9AsTSIH7nA8N6VjrXyZlCsuAMz5wL9dqbDy06ddfU9nUm/kVYFeAO3ueCEH7xt5R0uV3YZtLhqh3xw==
@@ -454,13 +454,6 @@
   version "11.1.2"
   resolved "https://registry.yarnpkg.com/@codingame/monaco-vscode-notifications-workbench-common/-/monaco-vscode-notifications-workbench-common-11.1.2.tgz#9d345c0257ce6d7dc2c963bd837d9455d6ce5aca"
   integrity sha512-MChzLX6RpLo8mNTT1R1wwEjo98FljVskBd2ZIGprycne5oydhpfFLQ9JRVc0N9UU5c0trvtvA2rFnEBagURT5g==
-  dependencies:
-    vscode "npm:@codingame/monaco-vscode-api@11.1.2"
-
-"@codingame/monaco-vscode-python-default-extension@^11.1.2":
-  version "11.1.2"
-  resolved "https://registry.yarnpkg.com/@codingame/monaco-vscode-python-default-extension/-/monaco-vscode-python-default-extension-11.1.2.tgz#a26d51478c120bcdc0faea709527e4ffbf650d7f"
-  integrity sha512-JMK3XroMjwMVadh41Z08/qgI95k1uOsu2eze6iHxSijIGzeWVxDTulnPFyxS1Rx3GxrpZgVC3R5CRaJqSjTLcw==
   dependencies:
     vscode "npm:@codingame/monaco-vscode-api@11.1.2"
 

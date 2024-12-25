@@ -9,7 +9,6 @@ import * as monaco from 'monaco-editor';
 import getKeybindingsServiceOverride from '@codingame/monaco-vscode-keybindings-service-override';
 import getThemeServiceOverride from '@codingame/monaco-vscode-theme-service-override';
 import getTextmateServiceOverride from '@codingame/monaco-vscode-textmate-service-override';
-import getConfigurationServiceOverride, { updateUserConfiguration } from '@codingame/monaco-vscode-configuration-service-override';
 
 import '@codingame/monaco-vscode-python-default-extension';
 
@@ -73,10 +72,9 @@ export const createUserConfig = (workspaceRoot: string, code: string, codeUri: s
         },
         vscodeApiConfig: {
             serviceOverrides: {
-                // ...getKeybindingsServiceOverride(), // not working !!!! can't type in the editor
+                // ...getKeybindingsServiceOverride(),
                 ...getThemeServiceOverride(),
-                ...getTextmateServiceOverride(),
-                // ...getConfigurationServiceOverride() // not working !!!! TypeError: workspaceService.acquireInstantiationService is not a function
+                ...getTextmateServiceOverride()
             },
             userConfiguration: {
                 json: JSON.stringify({
