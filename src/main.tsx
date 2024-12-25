@@ -30,8 +30,6 @@ export const runPythonReact = async () => {
     // Define the App component
     const App = () => {
 
-        const myRef = React.createRef();
-
         const [wrapper, setWrapper] = useState<MonacoEditorLanguageClientWrapper | null>(null);
 
         const [nowContent, setContent] = useState<string>(badPyCode);
@@ -66,20 +64,26 @@ export const runPythonReact = async () => {
                 console.log('App / wrapper is still null');
                 return;
             }
-            console.log('App / wrapper is now available', wrapper, myRef.current);
+            console.log('App / wrapper is now available', wrapper);
 
+            // !!!!!!!!!!!!!!!! NO NOT MODIFY THIS !!!!!!!!!!!!!!!!
             // Now you can do wrapper.onKeyDown(...) or other stuff here
-            // because this effect re-runs whenever `wrapper` changes
-            /*
-            wrapper.onKeyDown((e: any) => {
-               ...
+            wrapper.getEditor()?.onKeyDown((e) => {
+                console.log("App / wrapper ", e);
+                if ((e.keyCode === 83 || e.keyCode === 49) && e.ctrlKey) { // Corrected keyCode to 83 for 'S'
+                    // save();
+                    e.preventDefault();
+                }
             });
-            */
+            // !!!!!!!!!!!!!!!! NO NOT MODIFY THIS !!!!!!!!!!!!!!!!
+
+
         }, [wrapper]);
 
         setTimeout(() => {
             console.log("App / load text.");
-            setContent("toto")
+            // setContent("toto")
+            wrapper?.getEditor()?.setValue("toto");
         }, 10000);
 
         const wrapperConfig = createUserConfig('/workspace', nowContent, '/workspace/bad.py');
@@ -87,7 +91,6 @@ export const runPythonReact = async () => {
         return (
             <div style={{ height: '100vh', width: '100%', padding: '5px' }}>
                 <MonacoEditorReactComp
-                    ref={myRef}
                     wrapperConfig={wrapperConfig}
                     style={{ height: '100%', width: '100%' }}
                     onTextChanged={onTextChanged}
