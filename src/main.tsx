@@ -58,7 +58,8 @@ export const runPythonReact = async () => {
 
             // monaco.KeyMod.CtrlCmd equals "Control" on Windows, "Command" on macOS
             editor?.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, () => {
-                console.log('Saving...');
+                
+                console.log('Saving...', editor?.getValue());
             });
 
         }
