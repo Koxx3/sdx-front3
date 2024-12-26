@@ -87,7 +87,7 @@ const Editor: FC<EditorProps> = ({ initialCode, filePath }) => {
     }, [wrapper]);
 
     return (
-        <div style={{ border: '1px solid grey', margin: '8px 0', height: '500px', width: '100%' }}>
+        <div style={{ border: '1px solid grey', margin: '8px 0', height: '600px', width: '100%' }}>
             <MonacoEditorReactComp
                 wrapperConfig={wrapperConfig}
                 style={{ height: '100%', width: '100%' }}

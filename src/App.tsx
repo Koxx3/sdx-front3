@@ -6,7 +6,6 @@ import Editor from './Editor.tsx';
 export default function App() {
   return (
     <div>
-      <h1>My App with multiple editors</h1>
       <Editor 
         initialCode={`print("Hello from Editor 1")\nvar1 = 42`} 
         filePath="/workspace/editor1.py"
