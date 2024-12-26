@@ -65,10 +65,10 @@ const Editor: FC<EditorProps> = ({ initialCode, filePath }) => {
         setWrapper(loadedWrapper);
 
         // Example: after 10s, set the editor’s content to "toto"
-        setTimeout(() => {
-            console.log('Editor / Setting content to "toto"');
-            loadedWrapper.getEditor()?.setValue('toto');
-        }, 10000);
+        // setTimeout(() => {
+        //     console.log('Editor / Setting content to "toto"');
+        //     loadedWrapper.getEditor()?.setValue('toto');
+        // }, 10000);
 
         // Example: add a Ctrl+S command to the editor
         const editor = loadedWrapper.getEditor();

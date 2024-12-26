@@ -17,10 +17,11 @@ import { toSocket, WebSocketMessageReader, WebSocketMessageWriter } from 'vscode
 import { configureMonacoWorkers } from './utils.js';
 
 export const createUserConfig = (workspaceRoot: string, code: string, codeUri: string): WrapperConfig => {
+    // smartelec.eu.org:2087
     const url = createUrl({
         secured: false,
-        host: 'localhost',
-        port: 30001,
+        host: 'smartelec.eu.org',
+        port: 2088,
         path: 'pyright',
         extraParams: {
             authorization: 'UserAuth'
@@ -64,6 +65,56 @@ export const createUserConfig = (workspaceRoot: string, code: string, codeUri: s
                         name: 'workspace',
                         uri: vscode.Uri.parse(workspaceRoot)
                     },
+                    initializationOptions: {
+                        // files,
+                        // "pylsp": {
+                        //     "plugins": {
+                        //         "pycodestyle": { "enabled": true },
+                        //     }
+                        // }
+                        // "pylsp": {
+                        //     "plugins": {
+                        //         "flake8": { "enabled": false },
+                        //         "pyflakes": { "enabled": false },
+                        //         "pycodestyle": { "enabled": false },
+                        //         "mypy": {
+                        //             "enabled": true,
+                        //             "live_mode": true,
+                        //             "strict": true,
+                        //             // "dmypy": false,  // Set to true if you want to use daemonized mypy for performance
+                        //             // "config": "/workspace/mypy.ini"  // Path to a mypy configuration file, if required
+                        //         },
+                        //         "pylint": { "enabled": true, "executable": "pylint" },
+                        //         // "pylint": {
+                        //         //     "enabled": true,
+                        //         //     "args": [
+                        //         //         // "--init-hook=exec('import sys; sys.path.append(\\'/workspace\\')')"
+                        //         //     ] // Ensures /workspace is in PYTHONPATH
+                        //         // },
+                        //         "jedi_completion": { "enabled": false },  // Ensure jed
+                        //         "rope_autoimport": { "enabled": false },  // Re-enable
+                        //         "rope_completion": { "enabled": false },   // Re-enable
+                        //         "mccabe": { "enabled": false }             // Re-enable
+                        //     }
+                        //     // "pylsp": {
+                        //     //     "plugins": {
+                        //     //         "mypy": { "enabled": false },  // Optional for type checking
+                        //     //         "pyflakes": { "enabled": false },
+                        //     //         "pycodestyle": { "enabled": false },
+                        //     //         "pylint": { "enabled": false },
+                        //     //         // "pylint": {
+                        //     //         //     "enabled": true,
+                        //     //         //     "args": [
+                        //     //         //         // "--init-hook=exec('import sys; sys.path.append(\\'/workspace\\')')"
+                        //     //         //     ] // Ensures /workspace is in PYTHONPATH
+                        //     //         // },
+                        //     //         "jedi_completion": { "enabled": false },  // Ensure jed
+                        //     //         "rope_autoimport": { "enabled": false },  // Re-enable
+                        //     //         "rope_completion": { "enabled": false },   // Re-enable
+                        //     //         "mccabe": { "enabled": false }             // Re-enable
+                        //     //     }
+                        // }
+                    }
                 }
             }
         },
