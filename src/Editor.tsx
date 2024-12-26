@@ -1,6 +1,5 @@
 // Editor.tsx
-import React, { FC, useState, useEffect, useRef, useMemo } from 'react';
-import * as vscode from 'vscode';
+import { FC, useState, useEffect, useRef, useMemo } from 'react';
 import { MonacoEditorReactComp } from '@typefox/monaco-editor-react';
 import { MonacoEditorLanguageClientWrapper, TextChanges } from 'monaco-editor-wrapper';
 import * as monaco from 'monaco-editor';
@@ -49,7 +48,7 @@ const Editor: FC<EditorProps> = ({ initialCode, filePath }) => {
         onTextChanged={onTextChanged}
         onLoad={onLoad}
         style={{ height: '100%', width: '100%' }}
-        onError={(e) => console.error('MonacoEditorReactComp / Error', e)}
+        onError={(e : any) => console.error('MonacoEditorReactComp / Error', e)}
       />
     </div>
   );

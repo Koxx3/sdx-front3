@@ -1,6 +1,5 @@
 // src/App.tsx
 
-import React from 'react';
 import Editor from './Editor.tsx';
 
 export default function App() {

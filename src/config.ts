@@ -1,6 +1,5 @@
 // config.ts
 import * as vscode from 'vscode';
-import * as monaco from 'monaco-editor';
 
 import getThemeServiceOverride from '@codingame/monaco-vscode-theme-service-override';
 import getTextmateServiceOverride from '@codingame/monaco-vscode-textmate-service-override';
