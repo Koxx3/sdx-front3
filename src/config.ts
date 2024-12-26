@@ -1,7 +1,4 @@
-/* --------------------------------------------------------------------------------------------
- * Copyright (c) 2024 TypeFox and others.
- * Licensed under the MIT License. See LICENSE in the package root for license information.
- * ------------------------------------------------------------------------------------------ */
+// src/config.ts
 
 import * as vscode from 'vscode';
 import * as monaco from 'monaco-editor';
@@ -36,7 +33,7 @@ export const createUserConfig = (workspaceRoot: string, code: string, codeUri: s
 
     return {
         $type: 'extended',
-        htmlContainer: document.getElementById('monaco-editor-root')!,
+        // htmlContainer: document.getElementById('monaco-editor-root')!,
         logLevel: LogLevel.Debug,
         languageClientConfigs: {
             python: {

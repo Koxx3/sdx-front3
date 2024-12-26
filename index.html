@@ -1,20 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>React: Python Language Client & Language Server (Web Socket)</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-
-    <body>
-        <div id="react-root"></div>
-        <script type="module">
-            import { runPythonReact } from './src/main.tsx';
-
-            runPythonReact();
-        </script>
-    </body>
-
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Possibly import pyodide or other scripts if needed -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multiple Monaco Editors</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <!-- main.jsx is your Vite entry file -->
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
